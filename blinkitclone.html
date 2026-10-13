@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinkit</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f7f8fa;
+            color: #222;
+        }
+
+        /* Navbar */
+        header {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 6%;
+            border-bottom: 1px solid #eee;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: #f5c400;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: #222;
+        }
+
+        .location h4 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .location p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            background-color: #f7f8fa;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #f5c400;
+        }
+
+        .login {
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .cart {
+            background-color: #0c831f;
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            width: 88%;
+            max-width: 1250px;
+            margin: 25px auto;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(110deg, #fff3a5, #fce66c);
+            border-radius: 18px;
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            overflow: hidden;
+        }
+
+        .hero-text h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            color: #444;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text button {
+            background: #0c831f;
+            color: white;
+            padding: 13px 23px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .hero img {
+            width: 280px;
+            max-width: 40%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        /* Categories */
+        .section-title {
+            font-size: 25px;
+            margin: 35px 0 20px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+        }
+
+        .category {
+            background: white;
+            padding: 18px 10px;
+            text-align: center;
+            border-radius: 12px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px #00000010;
+        }
+
+        .category img {
+            width: 85px;
+            height: 75px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .category h4 {
+            font-size: 14px;
+        }
+
+        /* Offer Banner */
+        .offer {
+            margin-top: 35px;
+            padding: 25px;
+            background: #e3f6e8;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .offer h2 {
+            color: #0c831f;
+            margin-bottom: 8px;
+        }
+
+        .offer p {
+            color: #444;
+        }
+
+        .offer img {
+            width: 100px;
+            height: 85px;
+            object-fit: contain;
+        }
+
+        /* Products */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 5px 18px #00000012;
+            transform: translateY(-4px);
+        }
+
+        .product-card img {
+            display: block;
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .time {
+            display: inline-block;
+            background: #f3f3f3;
+            padding: 5px 7px;
+            border-radius: 5px;
+            font-size: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .weight {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .add-btn {
+            background: #f0fff2;
+            border: 1px solid #0c831f;
+            color: #0c831f;
+            font-weight: bold;
+            padding: 8px 17px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #0c831f;
+            color: white;
+        }
+
+        
+       
+
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-text h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 5%;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 27px;
+            }
+
+            .search-box {
+                order: 5;
+                flex-basis: 100%;
+                max-width: none;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .hero {
+                padding: 22px;
+            }
+
+            .hero-text h1 {
+                font-size: 25px;
+            }
+
+            .hero-text p {
+                font-size: 14px;
+            }
+
+            .hero img {
+                width: 115px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-card {
+                padding: 10px;
+            }
+
+            .product-card img {
+                height: 110px;
+            }
+
+            .section-title {
+                font-size: 21px;
+            }
+
+            .offer {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="logo">blinkit</div>
+
+        <div class="location">
+            <h4>Delivery in 10 minutes</h4>
+            <p>At Your Location  ▼</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text"
+                   placeholder="Search for groceries, vegetables and more">
+        </div>
+
+        <div class="login">Login</div>
+
+        <button class="cart">My Cart</button>
+    </header>
+
+    <main class="container">
+
+        
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Groceries delivered<br>at lightning speed!</h1>
+                <p>Fresh products. Best prices. Delivered to your door.</p>
+                <button>Explore Products ↓</button>
+            </div>
+
+            <img
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80"
+                alt="Fresh vegetables and groceries">
+        </section>
+
+        <h2 class="section-title">Dairy, Bread & Eggs</h2>
+        <section class="products">
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80" alt="Milk">
+                <span class="time">⏱ 10 MINS</span>
+                <h3>Fresh Cow Milk</h3>
+                <p class="weight">500 ml</p>
+                <div class="price-row">
+                    <span class="price">$6</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80" alt="Bread">
+                <span class="time">10 MINS</span>
+                <h3>Brown Bread</h3>
+                <p class="weight">400 g</p>
+                <div class="price-row">
+                    <span class="price">$2</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=400&q=80" alt="Eggs and breakfast">
+                <span class="time"> 10 MINS</span>
+                <h3>Fresh Eggs</h3>
+                <p class="weight">6 pieces</p>
+                <div class="price-row">
+                    <span class="price">$$2</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80" alt="Butter">
+                <span class="time"> 10 MINS</span>
+                <h3>Fresh Butter</h3>
+                <p class="weight">100 g</p>
+                <div class="price-row">
+                    <span class="price">$1</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="Chocolate cake">
+                <span class="time"> 10 MINS</span>
+                <h3>Chocolate Cake</h3>
+                <p class="weight">250 g</p>
+                <div class="price-row">
+                    <span class="price">$6</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+        </section>
+
+        
+        <h2 class="section-title">Fresh Fruits</h2>
+
+        <section class="products">
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80" alt="Apples">
+                <span class="time">10 MINS</span>
+                <h3>Apples</h3>
+                <p class="weight">4 pieces</p>
+                <div class="price-row">
+                    <span class="price">$10</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=400&q=80" alt="Bananas">
+                <span class="time">10 MINS</span>
+                <h3>Fresh Bananas</h3>
+                <p class="weight">6 pieces</p>
+                <div class="price-row">
+                    <span class="price">$6</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=400&q=80" alt="Oranges">
+                <span class="time"> 10 MINS</span>
+                <h3>Oranges</h3>
+                <p class="weight">500 g</p>
+                <div class="price-row">
+                    <span class="price">$0.5</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=400&q=80" alt="Fruit bowl">
+                <span class="time">10 MINS</span>
+                <h3>Mixed Fruits</h3>
+                <p class="weight">500 g</p>
+                <div class="price-row">
+                    <span class="price">$3</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?auto=format&fit=crop&w=400&q=80" alt="Grapes">
+                <span class="time">10 MINS</span>
+                <h3>Fresh Grapes</h3>
+                <p class="weight">500 g</p>
+                <div class="price-row">
+                    <span class="price">$1</span>
+                    <button class="add-btn">ADD +</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+  
+    
+    
+</body>
+</html>
